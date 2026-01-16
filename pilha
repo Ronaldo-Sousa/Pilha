@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct No {
+    int valor;
+    struct No *proximo;
+};
+
+void push(struct No **topo, int num) {
+    
+    struct No *novo = (struct No*) malloc(sizeof(struct No));
+    
+    novo->valor = num;
+    
+    novo->proximo = *topo; 
+    
+    *topo = novo;
+}
+
+void pop(struct No **topo) {
+    if (*topo == NULL) {
+        printf("Pilha vazia!\n");
+    } else {
+      
+        struct No *aux = *topo;
+        
+        *topo = (*topo)->proximo;
+        
+        free(aux);
+    }
+}
+
+int main() {
+    struct No *topo = NULL;
+
+    push(&topo, 10);
+    push(&topo, 20);
+
+    printf("Topo atual: %d\n", topo->valor);
+
+    pop(&topo);
+
+    printf("Topo depois do pop: %d\n", topo->valor);
+
+    return 0;
+}
