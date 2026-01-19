@@ -3,10 +3,10 @@
 
 struct No {
     int valor;
-    struct No *proximo;
+    struct No *proximo; //Criando a estrutura do nó.
 };
 
-void push(struct No **topo, int num) {
+void push(struct No **topo, int num) { //Função para adicionar elementos na pilha, precisa do endereço do topo da pilha e de uma variável para o valor.
     
     struct No *novo = (struct No*) malloc(sizeof(struct No));
     
@@ -17,9 +17,9 @@ void push(struct No **topo, int num) {
     *topo = novo;
 }
 
-void pop(struct No **topo) {
+void pop(struct No **topo) { //Função para remover um elemento da pilha, só precisa do endereço do topo.
     if (*topo == NULL) {
-        printf("Pilha vazia!\n");
+        printf("Pilha vazia!\n"); //Se a pilha estiver vazia, não tem o que remover.
     } else {
       
         struct No *aux = *topo;
@@ -36,11 +36,17 @@ int main() {
     push(&topo, 10);
     push(&topo, 20);
 
-    printf("Topo atual: %d\n", topo->valor);
+    printf("Topo atual: %d\n", topo->valor); //A saída vai ser 20 porque foi o último elemento adicionado na pilha.
 
     pop(&topo);
 
-    printf("Topo depois do pop: %d\n", topo->valor);
+    printf("Topo depois do pop: %d\n", topo->valor); //A saída agora vai ser 10, que é o novo topo porque o 20 saiu.
+
+    push(&topo, 30);
+    push(&topo, 40);
+    pop(&topo);
+
+    printf("Topo da pilha: %d\n", topo->valor); //A saída vai ser 30, pois embora o 40 tenha sido o último a ser adicionado, ele foi removido, 30 foi o último adicionado que permaneceu.
 
     return 0;
 }
